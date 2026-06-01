@@ -175,8 +175,7 @@ st.dataframe(peer_df, use_container_width=True)
     # Live wave reasoning text summary block
     if flux >= 0:
         st.markdown(f"""
-        <div style="background-color:#111827; padding:15px; border-radius:8px; border-left:6px solid #2ea44f; margin-bottom:25px;">
-            <b class="metric-profit">📈 Price Action Wave Reasoning: UPWARD BREAKOUT MOMENTUM</b><br>
+<div style="background-color:#111827; padding:15px; border-radius:8px; border-left:6px solid #2ea44f; margin-bottom:25px;">            <b class="metric-profit">📈 Price Action Wave Reasoning: UPWARD BREAKOUT MOMENTUM</b><br>
             <p style="margin:5px 0 0 0; font-size:14px; color:#8b949e;">
                 Sourcing volumes are currently outstripping localized floating ask buffers, creating an immediate momentum breakout trajectory across the timeline chart. Large institutional block allocations are active in the order books.
             </p>
