@@ -1,0 +1,68 @@
+import streamlit as st
+import pandas as pd
+import datetime
+import random
+import time
+
+# --- STYLING (GLASSMORPHISM) ---
+st.set_page_config(page_title="TATA MOTORS — Inside Radar Terminal", page_icon="📊", layout="wide")
+
+st.markdown("""
+<style>
+    .stApp { background-color: #0d1117; color: #f0f6fc; font-family: 'Inter', sans-serif; }
+    .fintech-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+    .ledger-card { background: #1c2128; border: 1px solid #444c56; border-radius: 10px; padding: 15px; text-align: center; margin-bottom: 10px; }
+    .brand-title { font-size: 42px; font-weight: 800; color: #ffffff; }
+    .brand-subtitle { color: #1f88e5; font-weight: 600; margin-bottom: 25px; }
+</style>
+""", unsafe_allow_html=True)
+
+# STATE & TICKER
+if 'tata_live_cmp' not in st.session_state: st.session_state.tata_live_cmp = 945.50
+if 'posts' not in st.session_state: st.session_state.posts = [{"id": 1, "user": "Aniket_Trader", "text": "Bullish! 🚀", "votes": 24}]
+if 'wave_nodes' not in st.session_state: st.session_state.wave_nodes = [945.50 for _ in range(25)]
+
+flux = random.uniform(-2.20, 2.20)
+st.session_state.tata_live_cmp += flux
+cmp = st.session_state.tata_live_cmp
+st.session_state.wave_nodes.pop(0); st.session_state.wave_nodes.append(cmp)
+
+# BRANDING WITH SLASH
+st.markdown('<p class="brand-title">TATA MOTORS LIMITED</p>', unsafe_allow_html=True)
+st.markdown('<p class="brand-subtitle">/ TATAMOTORS (NSE)</p>', unsafe_allow_html=True)
+
+tab1, tab2, tab3, tab4 = st.tabs(["🦅 HOME", "📊 LEDGER", "👥 VAULT", "💬 LOUNGE"])
+
+with tab1:
+    # 2x2 GRID METRICS
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"<div class='fintech-card'>PRICE: ₹{cmp:.2f}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='fintech-card'>P/E RATIO: 15.2</div>", unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"<div class='fintech-card'>MARKET CAP: 3.3T</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='fintech-card'>VARIANCE: {flux:.2f} INR</div>", unsafe_allow_html=True)
+    
+    # PEER TABLE
+    st.markdown("### 📊 Peer Comparison")
+    st.dataframe(pd.DataFrame({"Company": ["Tata Motors", "Mahindra", "Maruti"], "P/E": [15.2, 22.1, 28.5]}), use_container_width=True)
+
+    # ORIGINAL TAB 1 CONTENT
+    st.markdown("### 📋 Core Valuation Ledger Matrix")
+    st.line_chart(st.session_state.wave_nodes)
+    # [Yahan tumhara baaki original content jaisa tha waisa hi copy-paste kar dena]
+
+with tab2:
+    st.subheader("📊 Audited Corporate Compliance Accounting Sheets")
+    # [Yahan tumhara puraana Accounting Sheet ka code]
+
+with tab3:
+    st.subheader("👥 Executive Board & Strategic Leadership")
+    # [Yahan tumhara puraana Vault/Leadership code]
+
+with tab4:
+    st.subheader("💬 Traders Lounge")
+    # [Yahan tumhara puraana Lounge code]
+
+time.sleep(2)
+st.rerun()
