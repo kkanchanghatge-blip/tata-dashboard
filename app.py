@@ -69,3 +69,4 @@ st.bar_chart(pd.DataFrame(st.session_state.poll, index=["Votes"]).T)
 # --- AUTO REFRESH ---
 time.sleep(10)
 st.rerun()
+# Triggering update
